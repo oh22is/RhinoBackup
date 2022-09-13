@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
+    <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
+    <PackageReference Include="Serilog" Version="2.11.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="5.0.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\oh22.RhinoBackup.Core\oh22.RhinoBackup.Core.csproj" />
+    <ProjectReference Include="..\oh22.RhinoBackup.Export\oh22.RhinoBackup.Export.csproj" />
+    <ProjectReference Include="..\oh22.RhinoBackup.Import\oh22.RhinoBackup.Import.csproj" />
+    <ProjectReference Include="..\oh22.RhinoBackup.OutputAdapter.File\oh22.RhinoBackup.OutputAdapter.File.csproj" />
+    <ProjectReference Include="..\oh22.RhinoBackup.OutputAdapter.Directory\oh22.RhinoBackup.OutputAdapter.Directory.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
