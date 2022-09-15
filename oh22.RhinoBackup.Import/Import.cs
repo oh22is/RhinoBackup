@@ -60,16 +60,17 @@ namespace oh22.RhinoBackup.Import
       var alterScripts = orderedEntries.Where(s => !string.IsNullOrWhiteSpace(s.AlterScript))
         .Select(e => e.AlterScript);
 
-      await ExecuteScriptsAsync(dropScripts, rollbackOnFail);
-      await ExecuteScriptsAsync(createScripts, rollbackOnFail);
-      await ExecuteScriptsAsync(alterScripts, rollbackOnFail);
+      await ExecuteScriptsAsync("Drop", dropScripts, rollbackOnFail);
+      await ExecuteScriptsAsync("Create", createScripts, rollbackOnFail);
+      await ExecuteScriptsAsync("Alter", alterScripts, rollbackOnFail);
     }
 
-    private async Task ExecuteScriptsAsync(IEnumerable<string> paths, bool rollbackOnFail = false)
+    private async Task ExecuteScriptsAsync(string typeName, IEnumerable<string> scripts, bool rollbackOnFail = false)
     {
-      var queryStrings = paths.Where(s => !string.IsNullOrWhiteSpace(s));
-
+      _logger.LogInformation("Starting {ScriptType} Scripts", typeName);
+      var queryStrings = scripts.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
       await _databaseHelper.ExecuteAsync(queryStrings, rollbackOnFail);
+      _logger.LogInformation("Finished {ScriptCount} {ScriptType} Scripts", queryStrings.Count, typeName);
     }
 
     /// <summary>
