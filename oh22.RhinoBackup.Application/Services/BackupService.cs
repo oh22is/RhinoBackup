@@ -62,7 +62,7 @@ namespace oh22.RhinoBackup.Application
       }
       catch (Exception ex)
       {
-        _logger.LogError(ex, "{ExceptionMessage}", ex.Message);
+        _logger.LogError(ex, "Error while Executing.");
         Environment.ExitCode = (int)ExitCodes.Exception;
       }
       _applicationLifetime.StopApplication();

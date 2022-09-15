@@ -138,10 +138,10 @@ namespace oh22.RhinoBackup.Export.Helpers.Export
         return;
       }
 
-      Logger.LogInformation("No SQL objects of this type were found");
+      Logger.LogWarning("No SQL objects of this type were found");
       if (!Settings.AreSystemObjects.GetValueOrDefault())
       {
-        Logger.LogInformation("Please check if system objects of this type should be exported");
+        Logger.LogWarning("Please check if system objects of this type should be exported");
       }
     }
   }
