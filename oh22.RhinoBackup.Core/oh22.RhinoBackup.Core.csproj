@@ -6,7 +6,6 @@
     <Nullable>enable</Nullable>
     <Company>oh22</Company>
     <Product>RhinoBackup</Product>
-    <AssemblyName>RhinoBackup</AssemblyName>
     <Title>RhinoBackup</Title>
     <Authors>oh22information services GmbH</Authors>
     <LangVersion>default</LangVersion>

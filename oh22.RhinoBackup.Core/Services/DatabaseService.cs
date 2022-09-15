@@ -65,7 +65,7 @@ namespace oh22.RhinoBackup.Core.Services
           }
           catch (Exception ex)
           {
-            _logger.LogError(ex, "SQL-Execution failed:\n{QueryString}", query);
+            _logger.LogError(ex, "SQL-Execution failed on Script {Index}:\n{QueryString}", index, query);
             throw;
           }
         }

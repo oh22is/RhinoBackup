@@ -14,11 +14,10 @@ namespace oh22.RhinoBackup.Application
       using var host = Host
         .CreateDefaultBuilder()
         .ConfigureAppConfiguration((config) => config
-            .AddEnvironmentVariables("RHINO_")
-            .AddCommandLine((s) => s.Args = args.Except(new[] { "--export", "--import" }, StringComparer.InvariantCultureIgnoreCase))
-            .Build()
+          .AddEnvironmentVariables("RHINO_")
+          .AddCommandLine((s) => s.Args = args.Except(new[] { "--export", "--import" }, StringComparer.InvariantCultureIgnoreCase))
         )
-        .UseSerilog((context, logger) => logger.ReadFrom.Configuration(context.Configuration))
+        .UseSerilog((context, logging) => logging.ReadFrom.Configuration(context.Configuration))
         .ConfigureServices((service) =>
         {
           _ = service
@@ -31,7 +30,14 @@ namespace oh22.RhinoBackup.Application
         })
         .Build();
 
-      await host.RunAsync();
+      try
+      {
+        await host.RunAsync();
+      }
+      finally
+      {
+        Log.CloseAndFlush();
+      }
     }
   }
 }

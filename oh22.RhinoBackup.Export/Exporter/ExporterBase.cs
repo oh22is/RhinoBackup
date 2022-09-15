@@ -48,9 +48,9 @@ namespace oh22.RhinoBackup.Export.Helpers.Export
     /// <returns>An enumerable of sql export entries.</returns>
     public async Task<IEnumerable<SqlEntry>> ExecuteAsync(string name, SmoCollectionBase collection)
     {
-      using (Logger.BeginScope("{Name}", name))
+      using (Logger.BeginScope("{SqlType}", name))
       {
-        Logger.LogInformation("Export {Name} started", name);
+        Logger.LogInformation("Export {SqlType} started", name);
         try
         {
           var objectsBases = GetObjectBases(collection)
@@ -60,13 +60,13 @@ namespace oh22.RhinoBackup.Export.Helpers.Export
 
           LogSqlObjectCount(sqlExportEntries.Count);
 
-          Logger.LogInformation("Export {Name} succeeded", name);
+          Logger.LogInformation("Export {SqlType} succeeded", name);
 
           return sqlExportEntries;
         }
         catch (Exception ex)
         {
-          Logger.LogError(ex, "Export {Name} failed", name);
+          Logger.LogError(ex, "Export {SqlType} failed", name);
           throw;
         }
       }
@@ -97,7 +97,7 @@ namespace oh22.RhinoBackup.Export.Helpers.Export
 
         string? schemaQualifiedName = scripts.QualifiedName;
 
-        Logger.LogInformation("{Name}", schemaQualifiedName);
+        Logger.LogInformation("{SqlObject}", schemaQualifiedName);
 
         try
         {
@@ -119,7 +119,7 @@ namespace oh22.RhinoBackup.Export.Helpers.Export
         }
         catch (Exception ex)
         {
-          Logger.LogError(ex, "Error with {Name}", schemaQualifiedName);
+          Logger.LogError(ex, "Error with {SqlObject}", schemaQualifiedName);
         }
       }
 
@@ -138,10 +138,10 @@ namespace oh22.RhinoBackup.Export.Helpers.Export
         return;
       }
 
-      Logger.LogInformation("No SQL objects of this type were found");
+      Logger.LogWarning("No SQL objects of this type were found");
       if (!Settings.AreSystemObjects.GetValueOrDefault())
       {
-        Logger.LogInformation("Please check if system objects of this type should be exported");
+        Logger.LogWarning("Please check if system objects of this type should be exported");
       }
     }
   }
