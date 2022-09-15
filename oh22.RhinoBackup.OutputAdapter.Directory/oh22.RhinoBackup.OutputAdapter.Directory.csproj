@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
+    <Company>oh22</Company>
+    <Product>RhinoBackup</Product>
+    <Title>RhinoBackup</Title>
+    <Authors>oh22information services GmbH</Authors>
+    <LangVersion>default</LangVersion>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
