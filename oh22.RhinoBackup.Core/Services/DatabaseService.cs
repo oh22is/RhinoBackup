@@ -74,9 +74,9 @@ namespace oh22.RhinoBackup.Core.Services
 
         _logger.LogDebug("Query Strings executed");
       }
-      catch
+      catch (Exception ex)
       {
-        _logger.LogError("Query Strings execution failed");
+        _logger.LogError(ex, "Query Strings execution failed");
 
         if (rollbackOnFail)
         {
@@ -91,12 +91,16 @@ namespace oh22.RhinoBackup.Core.Services
           catch (Exception rollbackEx)
           {
             _logger.LogError(rollbackEx, "Rollback failed");
+
+            throw;
           }
         }
         else
         {
           _logger.LogDebug("Continuing");
         }
+
+        throw;
       }
     }
 
